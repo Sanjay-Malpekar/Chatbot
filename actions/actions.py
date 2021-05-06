@@ -6,13 +6,16 @@ from rasa_sdk import Action, Tracker
 from rasa_sdk.executor import CollectingDispatcher
 from rasa_sdk.events import SlotSet, EventType
 
+import requests
+
 import firebase_admin
 from firebase_admin import db
 
 cred_obj = firebase_admin.credentials.Certificate('Firebasekey.json')
 default_app = firebase_admin.initialize_app(cred_obj,{'databaseURL':'https://rasa-78cd0-default-rtdb.firebaseio.com/'})
+ref = db.reference('/')
 
-# import requests
+
 # import json
 # import os
 
@@ -104,12 +107,18 @@ default_app = firebase_admin.initialize_app(cred_obj,{'databaseURL':'https://ras
 #             text="Thanks, your answers have been recorded!")
 #         return []
 def retrieve_data(Category):
-    ref = db.reference('/')
+    
     for i in range(3):
         cat = 'Sub_Category' + '/' + str(i)
         result = ref.child('Products').order_by_child(cat).equal_to(Category).limit_to_first(5).get()
         if result is not None:
             return list(result.values())
+
+def retrieve_data_from_recommender_api(userid):
+    recommended_products = requests.get("https://5000-magenta-gerbil-lcxlnyyb.ws-us04.gitpod.io/{userid}")
+    
+
+    return recommended_products.json()['Recommended_Products'][:5]
 
 class ActionRecommender(Action):
 
@@ -122,12 +131,26 @@ class ActionRecommender(Action):
         tracker: Tracker,
         domain: "DomainDict"
     ) -> List[Dict[Text, Any]]:
-
-        option_select = tracker.get_slot("option_select")
         
-        dispatcher.utter_message(
-           response ="utter_ask_user_to_selected_product")
-        return[]
+        recommend_products = retrieve_data_from_recommender_api("A8UXKPR88WG8P")
+
+        if recommend_products is None:
+            dispatcher.utter_message(
+                text = "You seems a new User So, Here goes our Top 5 products! ;)"
+                )
+        else:
+            recommend_products_list =[]
+            for product in recommend_products:
+                refer = 'Products' + '/' + str(product)
+                result = ref.child(refer).get()
+                recommend_products_list.append(result)
+            
+            for i in range(len(recommend_products_list)):
+                dispatcher.utter_message(
+                    text ="Product Title: {}".format(recommend_products_list[i]['title']),
+                    image = recommend_products_list[i]['image'][0]
+                    )
+        return[SlotSet("products_list", recommend_products_list)]
 
 class ActionSearchProvider(Action):
 
@@ -143,19 +166,19 @@ class ActionSearchProvider(Action):
        
         Category = tracker.get_slot("category_type")
 
-        product = retrieve_data(Category)
+        products = retrieve_data(Category)
 
-        if product is None:
+        if products is None:
             dispatcher.utter_message(
                 text = "Sorry But we are not able to find Products related to the your Category :(!"
                 )
         else:
-            for i in range(len(product)):
+            for i in range(len(products)):
                 dispatcher.utter_message(
-                    text ="Product Title: {}".format(product[i]['title']),
-                    image = str(product[i]['image'][0])
+                    text ="Product Title: {}".format(products[i]['title']),
+                    image = products[i]['image'][0]
                     )
-        return[SlotSet("products_list", product)]
+        return[SlotSet("products_list", products)]
 
 
 

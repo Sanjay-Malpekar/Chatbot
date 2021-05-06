@@ -4,7 +4,6 @@ session_config:
   carry_over_slots_to_new_session: true
 intents:
 - Category
-- affirm
 - payment_options
 - address
 - greet
@@ -12,6 +11,7 @@ intents:
 - option_selection
 - out_of_scope
 - option_selected_recommend
+- affirm
 - goodbye
 - deny
 - bot_challenge

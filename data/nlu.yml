@@ -102,6 +102,9 @@ nlu:
     - A 102 virat Nagar
     - F 702 Poonam Nagar
     - F 102 Poonam Orchid
+    - F 702 Poonam nagar
+    - F 104 Virat Nagar
+    - F 505 Nagar
 - intent: payment_options
   examples: |
     - [Cod](payment_type)
@@ -145,7 +148,6 @@ nlu:
     - stop asking
     - nevermind
     - I want to do something else
-    - I changed my mind
     
 - intent: bot_challenge
   examples: |
