@@ -86,6 +86,14 @@ nlu:
     - [3](option_select)
     - [4](option_select)
     - [5](option_select)
+
+- intent: research
+  examples: |
+    - research products again
+    - I want to research the products
+    - I would like to research the products
+    - research
+    - Research
     
 - intent: address
   examples: |
@@ -100,11 +108,7 @@ nlu:
     - B 509 rose Nagar
     - A 203 Virat Nagar
     - A 102 virat Nagar
-    - F 702 Poonam Nagar
-    - F 102 Poonam Orchid
-    - F 702 Poonam nagar
-    - F 104 Virat Nagar
-    - F 505 Nagar
+    
 - intent: payment_options
   examples: |
     - [Cod](payment_type)

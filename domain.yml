@@ -2,6 +2,7 @@ version: '2.0'
 session_config:
   session_expiration_time: 60
   carry_over_slots_to_new_session: true
+
 intents:
 - Category
 - payment_options
@@ -15,12 +16,14 @@ intents:
 - goodbye
 - deny
 - bot_challenge
-- inform
 - thankyou
+- research
+
 entities:
 - category_type
 - option_select
 - payment_type
+
 slots:
   products_list:
     type: list
@@ -37,6 +40,7 @@ slots:
   category_type:
     type: text
     influence_conversation: false
+
 responses:
   utter_bot_info:
   - text: Hey there this is a bot!
@@ -67,40 +71,46 @@ responses:
       payload: Credit Card
     - title: Google Pay
       payload: Google Pay
-  utter_ask_user_to_selected_product:
+  utter_ask_affirmation:
+  - text: Did you mean?
+    buttons:
+    - payload: /research
+      title: Do you want to research the products?
+    - payload: /affirm
+      title: Continue?
+  # utter_ask_user_to_selected_product:
+  # - text: |-
+  #     Product_details:
+  #      - Product_name: {products_list[0]['title']}
+  #      - Product_image:
+  #         - image: {products_list[0]['image'][0]}
+  utter_confirm_payment_type:
   - text: |-
-      Product_details:
-       - Product_name: {products_list[0]['title']}
-       - Product_image:
-          - image: {products_list[0]['image'][0]}
-  utter_order_placed:
-  - text: Your Order has been Placed! Thank You :)!
+      Please Confirm your Payment option: {payment_type}
   utter_goodbye:
   - text: See you tomorrow. Bye!
   utter_iamabot:
   - text: I am a bot, powered by Rasa.
-  utter_slots_values:
-  - text: |-
-      Here's your daily wellness log:
-       - Exercised?: {confirm_exercise}
-       - Type of exercise: {exercise}
-       - Sleep: {sleep}
-       - Stuck to a healthy diet?: {diet}
-       - Stress level: {stress}
-       - Goal: {goal}
-  utter_no_worries:
-  - text: No problem :)
-  utter_ask_continue:
-  - text: Sorry, I don't quite understand. Do you want to continue?
+  # utter_slots_values:
+  # - text: |-
+  #     Here's your daily wellness log:
+  #      - Exercised?: {confirm_exercise}
+  #      - Type of exercise: {exercise}
+  #      - Sleep: {sleep}
+  #      - Stuck to a healthy diet?: {diet}
+  #      - Stress level: {stress}
+  #      - Goal: {goal}
+  
+
 actions:
 - action_add_address
 - action_address_lookup
-- action_place_order
 - action_recommend_products
 - action_search_products
 - utter_ask_category_type
 - utter_ask_payment_options
 - utter_ask_place_order
 - utter_bot_info
-- utter_order_placed
+- utter_confirm_payment_type
+- action_order_placed
 - utter_select_options

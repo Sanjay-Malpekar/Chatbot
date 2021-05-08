@@ -110,15 +110,15 @@ def retrieve_data(Category):
     
     for i in range(3):
         cat = 'Sub_Category' + '/' + str(i)
-        result = ref.child('Products').order_by_child(cat).equal_to(Category).limit_to_first(5).get()
+        result = ref.child('Products').order_by_child(cat).equal_to(Category).limit_to_first(1).get()
         if result is not None:
             return list(result.values())
 
 def retrieve_data_from_recommender_api(userid):
-    recommended_products = requests.get("https://5000-magenta-gerbil-lcxlnyyb.ws-us04.gitpod.io/{userid}")
+    recommended_products = requests.get("https://5000-coral-dinosaur-mgokyf3b.ws-us04.gitpod.io/{userid}")
     
 
-    return recommended_products.json()['Recommended_Products'][:5]
+    return recommended_products.json()['Recommended_Products'][:1]
 
 class ActionRecommender(Action):
 
@@ -150,6 +150,7 @@ class ActionRecommender(Action):
                     text ="Product Title: {}".format(recommend_products_list[i]['title']),
                     image = recommend_products_list[i]['image'][0]
                     )
+            dispatcher.utter_message(text="If you liked the products type 1..5 according to the product you want! ;)")
         return[SlotSet("products_list", recommend_products_list)]
 
 class ActionSearchProvider(Action):
@@ -178,6 +179,7 @@ class ActionSearchProvider(Action):
                     text ="Product Title: {}".format(products[i]['title']),
                     image = products[i]['image'][0]
                     )
+            dispatcher.utter_message(text="If you liked the products type 1..5 according to the product you want! ;)")
         return[SlotSet("products_list", products)]
 
 
@@ -220,7 +222,7 @@ class ActionAddAddress(Action):
 class ActionPlaceOrder(Action):
 
     def name(self) -> Text:
-        return "action_place_order"
+        return "action_order_placed"
 
     def run(
         self,
@@ -230,9 +232,7 @@ class ActionPlaceOrder(Action):
     ) -> List[Dict[Text, Any]]:
 
         Payment_selected = tracker.get_slot("payment_type")
+
+        dispatcher.utter_message(text="Your Order has been Placed! Thank You :)")
         
-        if Payment_selected == "Cod":
-            dispatcher.utter_message(text="Please Confirm Your Cod Order by typing Yes")
-        else:
-            dispatcher.utter_message(text="Here goes your Link!")
         return []
