@@ -4,15 +4,16 @@ session_config:
   carry_over_slots_to_new_session: true
 
 intents:
-- Category
 - payment_options
-- address
-- greet
 - option_search_provider
 - option_selection
+- affirm
+- address_found
+- Category
+- greet
+- address
 - out_of_scope
 - option_selected_recommend
-- affirm
 - goodbye
 - deny
 - bot_challenge
@@ -78,33 +79,16 @@ responses:
       title: Do you want to research the products?
     - payload: /affirm
       title: Continue?
-  # utter_ask_user_to_selected_product:
-  # - text: |-
-  #     Product_details:
-  #      - Product_name: {products_list[0]['title']}
-  #      - Product_image:
-  #         - image: {products_list[0]['image'][0]}
   utter_confirm_payment_type:
-  - text: |-
-      Please Confirm your Payment option: {payment_type}
+  - text: 'Please Confirm your Payment option: {payment_type}'
   utter_goodbye:
   - text: See you tomorrow. Bye!
   utter_iamabot:
   - text: I am a bot, powered by Rasa.
-  # utter_slots_values:
-  # - text: |-
-  #     Here's your daily wellness log:
-  #      - Exercised?: {confirm_exercise}
-  #      - Type of exercise: {exercise}
-  #      - Sleep: {sleep}
-  #      - Stuck to a healthy diet?: {diet}
-  #      - Stress level: {stress}
-  #      - Goal: {goal}
-  
-
 actions:
 - action_add_address
 - action_address_lookup
+- action_order_placed
 - action_recommend_products
 - action_search_products
 - utter_ask_category_type
@@ -112,5 +96,4 @@ actions:
 - utter_ask_place_order
 - utter_bot_info
 - utter_confirm_payment_type
-- action_order_placed
 - utter_select_options
