@@ -18,7 +18,7 @@ ref = db.reference('/')
 ref_firestore = firestore.client()
 
 
-user_id = "Hrushikesh"
+user_id = "A8UXKPR88WG8P"
 
 # import json
 # import os
@@ -119,7 +119,7 @@ def retrieve_data(Category):
             return list(result.values())
 
 def retrieve_data_from_recommender_api(userid):
-    recommended_products = requests.get("https://5000-brown-panther-i4nuuhq9.ws-us04.gitpod.io/{userid}")
+    recommended_products = requests.get("https://5000-amethyst-cheetah-xx8wdzkp.ws-us04.gitpod.io/{userid}")
     
 
     return recommended_products.json()['Recommended_Products'][:5]

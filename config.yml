@@ -33,8 +33,8 @@ policies:
 # # See https://rasa.com/docs/rasa/policies for more information.
   - name: MemoizationPolicy
   - name: TEDPolicy
-    max_history: 2
-    epochs: 200
+    max_history: 4
+    epochs: 400
     constrain_similarities: true
     model_confidence: linear_norm
   - name: RulePolicy

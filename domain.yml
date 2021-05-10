@@ -94,7 +94,7 @@ responses:
   - text: See you tomorrow. Bye!
   utter_iamabot:
   - text: I am a bot, powered by Rasa.
-  utter_default_fallback:
+  utter_default:
   - text: Sorry I didn't get that. Can you rephrase?
 actions:
 - action_add_address

@@ -578,6 +578,10 @@ stories:
   - intent: deny
   - action: utter_last_confirmation
   - intent: payment_options
+  - slot_was_set:
+    - payment_type: null
+  - action: utter_ask_payment_options
+  - intent: payment_options
     entities:
     - payment_type: Cod
   - slot_was_set:
