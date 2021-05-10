@@ -538,3 +538,52 @@ stories:
   - intent: affirm
   - action: action_order_placed
 
+- story: When User deny and decide to research at the end
+  steps:
+  - action: utter_ask_payment_options
+  - intent: payment_options
+    entities:
+    - payment_type: Cod
+  - slot_was_set:
+    - payment_type: Cod
+  - action: utter_confirm_payment_type
+  - intent: deny
+  - action: utter_last_confirmation
+  - intent: research 
+  - action: utter_select_options
+
+- story: When User deny and decide to continue at the end of story
+  steps:
+  - action: utter_ask_payment_options
+  - intent: payment_options
+    entities:
+    - payment_type: Cod
+  - slot_was_set:
+    - payment_type: Cod
+  - action: utter_confirm_payment_type
+  - intent: deny
+  - action: utter_last_confirmation
+  - intent: affirm
+  - action: action_order_placed
+
+- story: When User deny and make changes in payment options
+  steps:
+  - action: utter_ask_payment_options
+  - intent: payment_options
+    entities:
+    - payment_type: Cod
+  - slot_was_set:
+    - payment_type: Cod
+  - action: utter_confirm_payment_type
+  - intent: deny
+  - action: utter_last_confirmation
+  - intent: payment_options
+    entities:
+    - payment_type: Cod
+  - slot_was_set:
+    - payment_type: Cod
+  - action: utter_confirm_payment_type
+  - intent: affirm
+  - action: action_order_placed
+  
+

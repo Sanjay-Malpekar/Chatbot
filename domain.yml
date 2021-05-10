@@ -79,12 +79,23 @@ responses:
       title: Do you want to research the products?
     - payload: /affirm
       title: Continue?
+  utter_last_confirmation:
+  - text: Did you mean?
+    buttons:
+    - payload: /payment_options
+      title: Do you want to change the Payment Options?
+    - payload: /research
+      title: Do you want to research the products?
+    - payload: /affirm
+      title: Continue?
   utter_confirm_payment_type:
   - text: 'Please Confirm your Payment option: {payment_type}'
   utter_goodbye:
   - text: See you tomorrow. Bye!
   utter_iamabot:
   - text: I am a bot, powered by Rasa.
+  utter_default_fallback:
+  - text: Sorry I didn't get that. Can you rephrase?
 actions:
 - action_add_address
 - action_address_lookup
@@ -97,3 +108,5 @@ actions:
 - utter_bot_info
 - utter_confirm_payment_type
 - utter_select_options
+- utter_ask_affirmation
+- utter_last_confirmation

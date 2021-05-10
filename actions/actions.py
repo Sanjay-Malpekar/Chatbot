@@ -18,7 +18,7 @@ ref = db.reference('/')
 ref_firestore = firestore.client()
 
 
-user_id = "A8UXKPR88WG8P"
+user_id = "Hrushikesh"
 
 # import json
 # import os
@@ -119,7 +119,7 @@ def retrieve_data(Category):
             return list(result.values())
 
 def retrieve_data_from_recommender_api(userid):
-    recommended_products = requests.get("https://5000-green-wolverine-xqc6lqq6.ws-us03.gitpod.io/{userid}")
+    recommended_products = requests.get("https://5000-brown-panther-i4nuuhq9.ws-us04.gitpod.io/{userid}")
     
 
     return recommended_products.json()['Recommended_Products'][:5]
@@ -230,21 +230,24 @@ class ActionLookupAddress(Action):
             address = []
             for addr in address_list:
                 address.append(addr.to_dict())
-            
-            if len(address) == 1:
-                dispatcher.utter_message(
-                    text="Here is your lastest address we found please pick one!",
-                    buttons = [{'title': address[0]['address'], 'payload': '/address_found'}])
-            
-            elif len(address) == 2:
-                dispatcher.utter_message(
-                    text="Here is your lastest address we found please pick one!",
-                    buttons = [{'title': address[0]['address'], 'payload': '/address_found'},{'title': address[1]['address'], 'payload': '/address_found'}])
 
+            if len(address) == 0:
+                dispatcher.utter_message(text="We could not Found address? Can you please help us with the address here!")
+                return[]
+            else:
+                if len(address) == 1:
+                    dispatcher.utter_message(
+                        text="Here is your lastest address we found please pick one!",
+                        buttons = [{'title': address[0]['address'], 'payload': '/address_found'}])
             
-            return[SlotSet("address", address[0]['address'])]
+                elif len(address) == 2:
+                    dispatcher.utter_message(
+                        text="Here is your lastest address we found please pick one!",
+                        buttons = [{'title': address[0]['address'], 'payload': '/address_found'},{'title': address[1]['address'], 'payload': '/address_found'}])
+                
+                return[SlotSet("address", address[0]['address'])]
         else:
-            dispatcher.utter_message(text="We could not Found? Can you please help us with the address here!")
+            dispatcher.utter_message(text="We could not Found address? Can you please help us with the address here!")
             return[]
 
 class ActionAddAddress(Action):
