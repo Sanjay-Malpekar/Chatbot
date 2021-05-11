@@ -15,7 +15,7 @@ default_app = firebase_admin.initialize_app(cred_obj,{'databaseURL':'https://ras
 ref = db.reference('/')
 ref_firestore = firestore.client()
 
-user_id = "Hrushikesh"
+user_id = "hrushikesh"
 def retrieve_data(Category):
     
     for i in range(3):
@@ -25,7 +25,7 @@ def retrieve_data(Category):
             return list(result.values())
 
 def retrieve_data_from_recommender_api(userid):
-    recommended_products = requests.get("https://5000-jade-felidae-l9ae14ut.ws-us04.gitpod.io/{userid}")
+    recommended_products = requests.get("https://5000-ivory-duck-k7wdgjtt.ws-us04.gitpod.io/{userid}")
     
 
     return recommended_products.json()['Recommended_Products'][:5]

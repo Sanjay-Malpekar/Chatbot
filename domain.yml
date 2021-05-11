@@ -69,7 +69,6 @@ responses:
   - text: Please select the Payment Options! :)
     buttons:
     - title: Cod
-      image: https://images-na.ssl-images-amazon.com/images/I/41FT38SFJqL._SX38_SY50_CR,0,0,38,50_.jpg
       payload: Cod
     - title: Paytm
       payload: Paytm
