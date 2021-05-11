@@ -19,6 +19,9 @@ intents:
 - bot_challenge
 - thankyou
 - research
+- support
+- email_us
+- contact_us
 
 entities:
 - category_type
@@ -54,6 +57,10 @@ responses:
       payload: Search
     - title: Support and Help
       payload: Support
+  utter_email_ans:
+  - text: Please write a query on our email "Xyz@email.com" and we will revert you in 24 working hours;)!
+  utter_contact_ans:
+  - text: You can talk to our assistant using Contact details as 91+ XXXXXXXXXX which is available 24/7 for our customers;)
   utter_ask_place_order:
   - text: Would you like to place the order?
   utter_ask_category_type:
@@ -96,6 +103,14 @@ responses:
   - text: I am a bot, powered by Rasa.
   utter_default:
   - text: Sorry I didn't get that. Can you rephrase?
+  utter_ask_support:
+  - text: How can I help you !;)
+    buttons:
+    - payload: /email_us
+      title: Write a Query?
+    - payload: /contact_us
+      title: Contact Us?
+    
 actions:
 - action_add_address
 - action_address_lookup
@@ -110,3 +125,6 @@ actions:
 - utter_select_options
 - utter_ask_affirmation
 - utter_last_confirmation
+- utter_ask_support
+- utter_contact_ans
+- utter_email_ans

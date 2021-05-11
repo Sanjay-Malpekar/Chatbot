@@ -23,6 +23,10 @@ rules:
   - action: utter_bot_info
   - action: utter_select_options
 
+- rule: When ever user ask for support
+  steps:
+  - intent: support
+  - action: utter_ask_support
 
 - rule: Thank you
   steps:

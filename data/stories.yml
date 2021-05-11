@@ -589,5 +589,24 @@ stories:
   - action: utter_confirm_payment_type
   - intent: affirm
   - action: action_order_placed
-  
 
+- story: happy path for Support /email part
+  steps:
+  - intent: greet
+  - action: utter_bot_info
+  - action: utter_select_options
+  - intent: support
+  - action: utter_ask_support
+  - intent: email_us
+  - action: utter_email_ans
+
+- story: happy path for Support / contact part
+  steps:
+  - intent: greet
+  - action: utter_bot_info
+  - action: utter_select_options
+  - intent: support
+  - action: utter_ask_support
+  - intent: contact_us
+  - action: utter_contact_ans
+  

@@ -162,3 +162,21 @@ nlu:
     - we found the address
     - address was took
     - address was retrieved
+- intent: support
+  examples: |
+    - Support
+    - Help
+    - assist me with the details
+    - Customer Service
+- intent: contact_us
+  examples: |
+    - find me the contact detail
+    - how can i talk to your assistant
+    - Contact details
+    - Contact Us
+- intent: email_us
+  examples: |
+    - I need to write query
+    - where can i find email address
+    - help me with your email address
+    - Email
