@@ -10,12 +10,13 @@ import firebase_admin
 from firebase_admin import db
 from firebase_admin import firestore
 
-cred_obj = firebase_admin.credentials.Certificate('Firebasekey.json')
-default_app = firebase_admin.initialize_app(cred_obj,{'databaseURL':'https://rasa-78cd0-default-rtdb.firebaseio.com/'})
+cred_obj = firebase_admin.credentials.Certificate('SmartEcommerceFirebasekey.json')
+default_app = firebase_admin.initialize_app(cred_obj,{'databaseURL':'https://smartecom-60f57-default-rtdb.firebaseio.com/'})
 ref = db.reference('/')
 ref_firestore = firestore.client()
 
-user_id = "hrushikesh"
+user_id = "A3E652YQA5UQAY"
+
 def retrieve_data(Category):
     
     for i in range(3):
@@ -25,7 +26,7 @@ def retrieve_data(Category):
             return list(result.values())
 
 def retrieve_data_from_recommender_api(userid):
-    recommended_products = requests.get("https://5000-ivory-duck-k7wdgjtt.ws-us04.gitpod.io/{userid}")
+    recommended_products = requests.get("https://5000-amber-pig-upxd6yew.ws-us04.gitpod.io/{userid}")
     
 
     return recommended_products.json()['Recommended_Products'][:5]
